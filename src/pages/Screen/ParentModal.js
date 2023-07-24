@@ -3,7 +3,7 @@ import { Button, Modal, Typography, Box, Card, CardContent, IconButton, TextFiel
 import { Container, FormControl } from 'react-bootstrap';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Close } from '@mui/icons-material';
-import { size, weight } from "../assets/theme/theme";
+import { size, weight } from "../../store/theme";
 
 
 const style = {

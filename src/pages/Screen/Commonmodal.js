@@ -34,7 +34,7 @@ import MenuItem from "@mui/material/MenuItem";
 // import FormControl from '@mui/material/FormControl';
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
-import { size, weight } from "../assets/theme/theme";
+import { size, weight } from "../../store/theme";
 // import Checkbox from '@mui/material/Checkbox';
 
 const style = {

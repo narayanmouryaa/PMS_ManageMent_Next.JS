@@ -22,7 +22,7 @@ import ParentModalThree from "./ParentModalThree";
 import { Close } from "@mui/icons-material";
 import { useState } from "react";
 // import Typography from '@mui/material';
-import { size, weight } from "../assets/theme/theme";
+import { size, weight } from "../../store/theme";
 
 const style = {
   position: "absolute",

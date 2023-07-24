@@ -22,7 +22,7 @@ import CommonModal from "../Screen/Commonmodal";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 // import zIndex from '@mui/material/styles/zIndex';
-import { size, weight } from "../assets/theme/theme";
+import { size, weight } from "../../store/theme";
 
 const drawerWidth = 280;
 

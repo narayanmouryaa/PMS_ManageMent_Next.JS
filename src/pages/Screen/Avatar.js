@@ -11,7 +11,7 @@ const Avatar = ({ name, SpaceColoCode, height, width }) => {
 //     const randomIndex = Math.floor(Math.random() * colors.length);
 //     return colors[randomIndex];
 //   };
-console.log(name,SpaceColoCode,'SpaceColoCode Name ')
+// console.log(name,SpaceColoCode,'SpaceColoCode Name ')
 
   // Style object for the avatar
   const avatarStyle = {

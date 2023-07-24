@@ -22,7 +22,7 @@ import GridviewCard from "./Gridviewcard";
 // import SearchIcon from '@mui/icons-material/Search';
 // import MiniDrawer from '../components/Minidrawer';
 import AddIcon from "@mui/icons-material/Add";
-import { size, weight } from "../assets/theme/theme";
+import { size, weight } from "../../store/theme";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
