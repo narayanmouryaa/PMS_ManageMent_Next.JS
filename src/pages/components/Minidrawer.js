@@ -13,7 +13,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { Typography, Button } from "@mui/material";
 import BasicMenu from "../Screen/Selectoption";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+// import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import FolderCopyOutlinedIcon from "@mui/icons-material/FolderCopyOutlined";
 import { ListItemIcon, Collapse } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -25,6 +25,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { size, weight } from "../../styles/theme";
 import { useEffect } from "react";
 import axios from "axios";
+import styles from '../../styles/Home.module.css'
 
 const drawerWidth = 280;
 
@@ -157,7 +158,7 @@ export default function MiniDrawer() {
           </button>
         ) : null}
 
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex" }} className={styles.Mainbox}>
           <CssBaseline />
           <Drawer
             className="drawer_container"
