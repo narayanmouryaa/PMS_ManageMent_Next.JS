@@ -22,10 +22,11 @@ import Switch from "@mui/material/Switch";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import SquareIcon from "@mui/icons-material/Square";
 import Stack from "@mui/material/Stack";
-// import Autocomplete from "@mui/material/Autocomplete";
+import Autocomplete from "@mui/material/Autocomplete";
 import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
-import Avatar from "../Screen/Avatar";
+import Avatar from "./Avatar";
 import axios from "axios";
+import { toast } from "react-toastify";
 // import MultipleSelectCheckmarks from "@/store/multipleselectuser";
 
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -34,10 +35,9 @@ import MenuItem from "@mui/material/MenuItem";
 // import FormControl from '@mui/material/FormControl';
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
-import { size, weight } from "../../pages/assets/theme";
-// import { Close } from "@mui/icons-material";
+import { size, weight } from "../assets/theme";
 // import Checkbox from '@mui/material/Checkbox';
-import styles from "../../styles/Home.module.css";
+import styles from '../../styles/Home.module.css'
 
 const style = {
   position: "absolute",
@@ -48,7 +48,7 @@ const style = {
   bgcolor: "background.paper",
   borderRadius: "10px",
   boxShadow: 24,
-  p: 4,
+  p: 8,
 };
 
 
@@ -106,20 +106,8 @@ BootstrapDialogTitle.propTypes = {
 
 const CommonModal = ({ open, handleClose }) => {
   const [viewData, setViewData] = useState(1);
+
   const [checked, setChecked] = React.useState(true);
-
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
-  // const handleChange = (event) => {
-  //   setChecked(event.target.checked);
-  // };
-
-  // const [UserNameSelect, setUserNameSelect] = React.useState([]);
 
   const handleChange = (event) => {
     const {
@@ -130,112 +118,93 @@ const CommonModal = ({ open, handleClose }) => {
       typeof value === "string" ? value.split(",") : value
     );
   };
-
-  //    const [openModal1,handleClose1] = useState(false);
-
   const [formData, setFormData] = useState({
-    SpaceName: "",
-    UserNameSelect: "",
-    ActiveStatus: "",
-    ComapleteStatus: "",
-    closedStatus: "",
+    name: "",
+    color: "",
+    icon: null,
+    sharedWith: [],
+    status: {
+      ActiveStatuscolor: "",
+      ActiveStatusname: "",
+      comapleteStatuscolor: "",
+      comapleteStatusname: "",
+      closedStatuscolor: "",
+      closedStatusname: "",
+    },
   });
-  const [spaceName, setSpaceName] = useState("");
-  const [activeStatus, setActiveStatus] = useState("");
-  const [comapleteStatus, setComapleteStatus] = useState("");
-  const [closedStatus, setClosedStatus] = useState("");
-  const [UserNameSelect, setUserNameSelect] = React.useState([]);
-  // console.log(UserNameSelect, "UserNameSelect...........");
-  // get Color Get
-  const [color, setColor] = useState({
-    SpaceColor: "",
-    ActiveStatusColor: "",
-    ComapleteStatusColor: "",
-    ClosedStatusColor: "",
-  });
+  console.log(formData, ".........................formData");
 
-  // const [colorCode, setColorCode] = useState("");
-  const [SpaceColorCode, setSpaceColorCode] = useState("#ff0000");
-  const [ActiveStatusColorCode, setActiveStatusColorCode] = useState("#ff0000");
-  const [ComapleteStatusColorCode, setComapleteStatusColorCode] =
-    useState("#ff0000");
-  const [ClosedStatusColorCode, setClosedStatusColorCode] = useState("#ff0000");
-
-  const handleInputChangeColor = (event) => {
-    const colorValue = event.target.value;
-    setColor(colorValue);
-    setSpaceColorCode(colorValue.toUpperCase());
-    setActiveStatusColorCode(colorValue.toUpperCase());
-    setComapleteStatusColorCode(colorValue.toUpperCase());
-    setClosedStatusColorCode(colorValue.toUpperCase());
+  const handleInputChanges = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
-  // First Element get
-
-  const data = [
-    spaceName,
-    SpaceColorCode,
-    ActiveStatusColorCode,
-    ComapleteStatusColorCode,
-    ClosedStatusColorCode,
-    activeStatus,
-    comapleteStatus,
-    closedStatus,
-  ];
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const accessToken = localStorage.getItem("Userlogintoken");
-    const config = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    };
-    const apiData = await axios.post(
-      "https://pmsapi.qrstaff.in/api/space/",
-      data,
-      config
-    );
-    // console.log(apiData, "submitdata");
+  const handleStatusChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      status: {
+        ...prevFormData.status,
+        [name]: value,
+      },
+    }));
   };
-  const [inputValue, setInputValue] = useState("");
-
-  const handleInputChange = (event) => {
-    const newValue = event.target.value;
-    setSpaceName(newValue);
-    if (newValue.length > 0) {
-      const firstElement = newValue[0];
-      console.log(firstElement);
-      setInputValue(firstElement);
-      // or do something else with the value
-    }
-  };
-
-  // console.log(inputValue, "inputValue.........");
-
-  // file data store
-  const names = [
-    "Oliver Hansen",
-    "Van Henry",
-    "April Tucker",
-    "Ralph Hubbard",
-    "Omar Alexander",
-    "Carlos Abbott",
-    "Miriam Wagner",
-    "Bradley Wilkerson",
-    "Virginia Andrews",
-    "Kelly Snyder",
-    "narayan Mouray",
-    "kanahaiya singh",
-  ];
-
-  // console.log(fileData,"datafile............")
-  const [selectedImage, setSelectedImage] = useState(null);
-  // console.log(selectedImage,'selectedFile......')
-
-  // Function to handle file selection
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    setSelectedImage(URL.createObjectURL(file));
+    if (file) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        image: URL.createObjectURL(file), // Store the selected image path in state
+      }));
+    }
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Replace 'API_ENDPOINT' with your actual API URL
+    const apiEndpoint = "https://pmsapi.qrstaff.in/api/space/add";
+    // Replace 'YOUR_ACCESS_TOKEN' with the actual token value
+    const accessToken = localStorage.getItem("Userlogintoken");
+    // Set the token in the request headers
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+    };
+
+    axios
+      .post(apiEndpoint, formData, { headers })
+      .then((response) => {
+        console.log("POST request successful:", response.data);
+        const { _id } = response.data;
+        console.log("Newly inserted document _id:", _id);
+        toast.success(response.data.message);
+
+        // Perform any other actions upon success, e.g., show a success message
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 403) {
+          // Handle 403 error here
+          console.log("403 Error: Access Denied");
+          toast.success(response.data.message);
+          toast.success("403 Error: Access Denied");
+
+          // Perform any specific actions for a 403 error, e.g., show an error message
+        } else {
+          // Handle other errors
+          console.log("Error:", error.message);
+          toast.success(error.message);
+          // Perform any other actions for other errors, e.g., show a generic error message
+        }
+      });
+  };
+  const users = ["Saurabh", "Ayush", "Aryan", "Sanjeev"];
+  const handleUserSelect = (event) => {
+    const selectedUsers = event.target.value;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      sharedWith: selectedUsers,
+    }));
   };
   return (
     <>
@@ -248,9 +217,9 @@ const CommonModal = ({ open, handleClose }) => {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-        // style={{ zIndex: "3000" }}
+          // style={{ zIndex: "3000" }}
         >
-          <Box className={styles.Mainbox}>
+          <Box className={styles.Mainbox} >
             {viewData === 1 && (
               <Box sx={style} className={styles.Mainbox}>
                 <BootstrapDialogTitle
@@ -258,19 +227,12 @@ const CommonModal = ({ open, handleClose }) => {
                     fontSize: size.font1,
                     fontWeight: weight.bold,
                     marginLeft: "-22px",
-                    display: 'flex',
-                    justifyContent: 'center'
+                    display:'flex',
+                    justifyContent:'center'
                   }}
-
+                  id="customized-dialog-title"
                   onClose={handleClose}
                 >
-                  {/* <IconButton
-                  sx={{ position: "absolute", top: "8px", right: "8px" }}
-                  onClick={handleClose}
-                >
-                  <Close />
-                </IconButton> */}
-
                   Create New Space
                 </BootstrapDialogTitle>
                 <Typography
@@ -285,8 +247,8 @@ const CommonModal = ({ open, handleClose }) => {
                   style={{ display: "flex", justifyContent: "space-between" }}
                   className={styles.Mainbox}
                 >
-                  <Box className={styles.Mainbox}>
-                    <Box mt={4} className={styles.Mainbox} >
+                  <Box className={styles.Mainbox} >
+                    <Box mt={4} className={styles.Mainbox}>
                       <FormControl variant="standard">
                         <InputLabel
                           htmlFor="input-with-icon-adornment"
@@ -301,8 +263,10 @@ const CommonModal = ({ open, handleClose }) => {
                           id="input-with-icon-adornment"
                           placeholder="Enter Space Name"
                           type="text"
-                          value={spaceName}
-                          onChange={handleInputChange}
+                          // value={spaceName}
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChanges}
                           style={{ width: "250%" }}
                           sx={{
                             // width: 500,
@@ -331,11 +295,11 @@ const CommonModal = ({ open, handleClose }) => {
                           id="input-with-icon-adornment"
                           placeholder="Enter Space Color Code"
                           type="color"
-                          style={{ width: "200%" }}
+                          style={{ width: "100%" }}
                           // sx={{ width: 500 }}
-                          name="SpaceColorCode"
-                          value={SpaceColorCode}
-                          onChange={(e) => setSpaceColorCode(e.target.value)}
+                          name="color"
+                          value={formData.color}
+                          onChange={handleInputChanges}
                           startAdornment={
                             <InputAdornment position="start"></InputAdornment>
                           }
@@ -343,7 +307,7 @@ const CommonModal = ({ open, handleClose }) => {
                       </FormControl>
                     </Box>
                     <Box mt={3}>
-                      <FormControl variant="standard" >
+                      <FormControl variant="standard">
                         <InputLabel
                           htmlFor="input-with-icon-adornment"
                           style={{
@@ -357,8 +321,10 @@ const CommonModal = ({ open, handleClose }) => {
                           id="input-with-icon-adornment"
                           placeholder="Upload Space icon"
                           type="file"
+                          accept="image/*"
                           onChange={handleImageChange}
-                          style={{ paddingBottom: "10px",width:'160%' }}
+                          style={{ paddingBottom: "10px" ,width:'160%'}}
+                          // sx={{ width: 500 }}
                           startAdornment={
                             <InputAdornment position="start"></InputAdornment>
                           }
@@ -366,42 +332,33 @@ const CommonModal = ({ open, handleClose }) => {
                       </FormControl>
                     </Box>
                     <Box>
+                      
 
-                      <FormControl sx={{ m: 1 }} style={{width:'160%'}}>
-                        <InputLabel
-                          sx={{ mt: 2 }}
-                          id="demo-multiple-checkbox-label"
-                        >
-                          Select{" "}
-                        </InputLabel>
+                      <FormControl variant="outlined" margin="normal" style={{width:'160%'}}>
+                        <InputLabel>Shared With</InputLabel>
                         <Select
-                          labelId="demo-multiple-checkbox-label"
-                          id="demo-multiple-checkbox"
+                          name="sharedWith"
                           multiple
-                          value={UserNameSelect}
-                          onChange={handleChange}
-                          input={<OutlinedInput label="Tag" />}
-                          renderValue={(selected) => selected.join(", ")}
-                          MenuProps={MenuProps}
-                          sx={{  mt: 2, height: '50px' }}
-                          
+                          value={formData.sharedWith}
+                          onChange={handleUserSelect}
+                          label="Shared With"
+                          style={{ paddingBottom: "10px" }}
+                          sx={{ width: 500 }}
                         >
-                          {names.map((name) => (
-                            <MenuItem key={name} value={name}>
-                              <Checkbox
-                                checked={UserNameSelect.indexOf(name) > -1}
-                              />
-                              <ListItemText primary={name} />
+                          {users.map((user, index) => (
+                            <MenuItem key={index} value={user}>
+                              {user}
                             </MenuItem>
                           ))}
+                          {/* Add more users as needed */}
                         </Select>
                       </FormControl>
                     </Box>
                   </Box>
                   <Box style={{ display: "flex" }} className={styles.Mainbox}>
                     <Avatar
-                      name={inputValue}
-                      SpaceColoCode={SpaceColorCode}
+                      name={formData.name}
+                      SpaceColoCode={formData.color}
                       height={"90px"}
                       width={"90px"}
                     />
@@ -414,7 +371,7 @@ const CommonModal = ({ open, handleClose }) => {
                   <Button
                     variant="contained"
                     fullWidth
-                    style={{ marginTop: "30px" }}
+                    style={{ marginTop: "30px"}}
                     onClick={() => setViewData(viewData + 1)}
                   >
                     Next
@@ -459,9 +416,9 @@ const CommonModal = ({ open, handleClose }) => {
                       </label>
                       <TextField
                         fullWidth
-                        name="ActiveStatus"
-                        value={activeStatus}
-                        onChange={(e) => setActiveStatus(e.target.value)}
+                        name="ActiveStatusname"
+                        value={formData.status.ActiveStatusname}
+                        onChange={handleStatusChange}
                       />
                     </Grid>
 
@@ -477,13 +434,10 @@ const CommonModal = ({ open, handleClose }) => {
                       </label>
                       <TextField
                         fullWidth
-                        style={{ height: '40px' }}
                         type="color"
-                        name="ActiveStatusColor"
-                        value={ActiveStatusColorCode}
-                        onChange={(e) =>
-                          setActiveStatusColorCode(e.target.value)
-                        }
+                        name="ActiveStatuscolor"
+                        value={formData.status.ActiveStatuscolor}
+                        onChange={handleStatusChange}
                       />
                     </Grid>
                     <Grid item xs={1} style={{ fontSize: "50px" }}>
@@ -516,9 +470,9 @@ const CommonModal = ({ open, handleClose }) => {
                       <TextField
                         fullWidth
                         style={{ height: "20px" }}
-                        name="ComapleteStatus"
-                        value={comapleteStatus}
-                        onChange={(e) => setComapleteStatus(e.target.value)}
+                        name="comapleteStatusname"
+                        value={formData.status.comapleteStatusname}
+                        onChange={handleStatusChange}
                       />
                     </Grid>
 
@@ -535,11 +489,9 @@ const CommonModal = ({ open, handleClose }) => {
                       <TextField
                         fullWidth
                         type="color"
-                        name="ComapleteStatusColor"
-                        value={ComapleteStatusColorCode}
-                        onChange={(e) =>
-                          setComapleteStatusColorCode(e.target.value)
-                        }
+                        name="comapleteStatuscolor"
+                        value={formData.status.comapleteStatuscolor}
+                        onChange={handleStatusChange}
                       />
                     </Grid>
                     <Grid item xs={1} style={{ fontSize: "50px" }}>
@@ -571,9 +523,9 @@ const CommonModal = ({ open, handleClose }) => {
                       </label>
                       <TextField
                         fullWidth
-                        name="closedStatus"
-                        value={closedStatus}
-                        onChange={(e) => setClosedStatus(e.target.value)}
+                        name="closedStatusname"
+                        value={formData.status.closedStatusname}
+                        onChange={handleStatusChange}
                       />
                     </Grid>
 
@@ -584,11 +536,9 @@ const CommonModal = ({ open, handleClose }) => {
                       <TextField
                         fullWidth
                         type="color"
-                        name="ClosedStatusColor"
-                        value={ClosedStatusColorCode}
-                        onChange={(e) =>
-                          setClosedStatusColorCode(e.target.value)
-                        }
+                        name="closedStatuscolor"
+                        value={formData.status.closedStatuscolor}
+                        onChange={handleStatusChange}
                       />
                     </Grid>
                     <Grid item xs={1} style={{ fontSize: "50px" }}>
@@ -627,7 +577,7 @@ const CommonModal = ({ open, handleClose }) => {
                     <span
                       style={{
                         fontSize: size.font1,
-                        fontWeight: weight.bold,
+                        fontWeight: weight.medium,
                       }}
                     >
                       {" "}
@@ -731,7 +681,7 @@ const CommonModal = ({ open, handleClose }) => {
                     <span
                       style={{
                         fontSize: size.font1,
-                        fontWeight: weight.bold,
+                        fontWeight: weight.medium,
                       }}
                     >
                       {" "}
@@ -769,7 +719,7 @@ const CommonModal = ({ open, handleClose }) => {
                         >
                           Space Name
                         </Typography>
-                        <Typography>{spaceName}</Typography>
+                        <Typography>{formData.name}</Typography>
                       </Box>
                     </Grid>
                   </Grid>
@@ -806,8 +756,8 @@ const CommonModal = ({ open, handleClose }) => {
                         </Typography>
 
                         <Avatar
-                          name={inputValue}
-                          SpaceColoCode={SpaceColorCode}
+                          name={formData.name}
+                          SpaceColoCode={formData.color}
                           height={"40px"}
                           width={"40px"}
                         />
@@ -845,9 +795,10 @@ const CommonModal = ({ open, handleClose }) => {
                         >
                           Shared with
                         </Typography>
+
                         <Avatar
-                          name={inputValue}
-                          SpaceColoCode={SpaceColorCode}
+                          name={formData.name}
+                          SpaceColoCode={formData.color}
                           height={"40px"}
                           width={"40px"}
                         />
@@ -888,13 +839,19 @@ const CommonModal = ({ open, handleClose }) => {
 
                         <Stack flexDirection="row">
                           <SquareIcon
-                            style={{ color: `${ActiveStatusColorCode}` }}
+                            style={{
+                              color: `${formData.status.ActiveStatuscolor}`,
+                            }}
                           />
                           <SquareIcon
-                            style={{ color: `${ComapleteStatusColorCode}` }}
+                            style={{
+                              color: `${formData.status.comapleteStatuscolor}`,
+                            }}
                           />
                           <SquareIcon
-                            style={{ color: `${ClosedStatusColorCode}` }}
+                            style={{
+                              color: `${formData.status.closedStatuscolor}`,
+                            }}
                           />
                         </Stack>
                       </Box>
@@ -952,8 +909,7 @@ const CommonModal = ({ open, handleClose }) => {
                   ) : (
                     <Button
                       variant="contained"
-                      fullWidth
-                      // style={{ width: "650px" }}
+                      style={{ width: "650px" }}
                       onClick={() => setViewData(viewData + 1)}
                     >
                       Next

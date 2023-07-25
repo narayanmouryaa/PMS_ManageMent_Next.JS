@@ -13,7 +13,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { Typography, Button } from "@mui/material";
 import BasicMenu from "../Screen/Selectoption";
-// import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import FolderCopyOutlinedIcon from "@mui/icons-material/FolderCopyOutlined";
 import { ListItemIcon, Collapse } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -23,6 +23,8 @@ import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 // import zIndex from '@mui/material/styles/zIndex';
 import { size, weight } from "../assets/theme";
+import { useEffect } from "react";
+import axios from "axios";
 
 const drawerWidth = 280;
 
@@ -45,6 +47,29 @@ const NestedList = ({ primary, list }) => {
   const handleClick = () => {
     setOpen(!open);
   };
+  const [apiData, setApiData] = useState([]);
+
+  const getData = async () => {
+    try {
+      const apiResponse = await axios.get(
+        "https://pmsapi.qrstaff.in/api/space/",
+        {
+          headers: {
+            Authorization: localStorage.getItem("Userlogintoken"),
+          },
+        }
+      );
+      setApiData(apiResponse.data.data);
+      return apiResponse.data;
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+
+  console.log(apiData,'........ApiData')
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <React.Fragment>
@@ -54,16 +79,23 @@ const NestedList = ({ primary, list }) => {
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {[" Arvind Folder"].map((list, index) => (
+          {apiData.map((list, index) => (
             <ListItem key={index} disablePadding>
               <ListItemIcon>
                 <FolderCopyOutlinedIcon sx={{ ml: 2 }} />
               </ListItemIcon>
-
-              <ListItemText primary={list} />
+              <ListItemText primary={list.name} />
               <BasicMenu />
             </ListItem>
           ))}
+           {/* <ListItem disablePadding>
+              <ListItemIcon>
+                <FolderCopyOutlinedIcon sx={{ ml: 2 }} />
+              </ListItemIcon>
+              <span>{apiData.name}</span>
+              <ListItemText primary={list} />
+              <BasicMenu />
+            </ListItem> */}
 
           {/* {[" List 1", "List 2", "List 3", "List 4", "List 5"].map(
             (text, index) => (
@@ -215,7 +247,7 @@ export default function MiniDrawer() {
             <List style={{ marginLeft: "30px" }}>
               <NestedList
                 primary="Space test 1"
-                style={{ fontSize:size.font13,fontWeight:weight.bold }}
+                style={{ fontSize: size.font13, fontWeight: weight.bold }}
                 items={["list 1"]}
               />
             </List>

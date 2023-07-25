@@ -17,13 +17,13 @@
 
 @media (max-width: 600px) {
     .Mainbox {
-        width: 80%;
+        width: 90%;
     }
 }
 
 /* Styles for screens with a minimum width of 601 pixels and maximum of 1200 pixels */
 @media (min-width: 601px) and (max-width: 1200px) {
     .Mainbox {
-        width: 80%;   
+        width: 90%;   
     }
 }
