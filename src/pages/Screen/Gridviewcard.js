@@ -44,7 +44,8 @@ const GridviewCard = () => {
   const [endDate, setEndDate] = useState(null);
   const [assignees, setAssignees] = useState([]);
   const [editCardIndex, setEditCardIndex] = useState(-1);
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal,setOpenModal] = useState(false);
+ 
 
   // Sample list of users for Autocomplete
   const users = [
@@ -118,7 +119,7 @@ const GridviewCard = () => {
   return (
     <div>
       <Button variant="contained" onClick={() => setOpenModal(true)}>
-        Create New Task
+        +
       </Button>
 
       <Modal open={openModal} onClose={() => setOpenModal(false)}>

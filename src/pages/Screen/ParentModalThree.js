@@ -4,6 +4,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Close } from '@mui/icons-material';
 import Link from 'next/link';
 import { size, weight } from "../../store/theme";
+import styles from '../../styles/Home.module.css'
 
 const style = {
     position: 'absolute',
@@ -39,7 +40,7 @@ const ParentModal = ({ open, setOpen }) => {
                 onClose={handleClose}
             // style={{ zIndex: "3000" }}
             >
-                <Box sx={style}>
+                <Box sx={style} className={styles.Mainbox}>
                     {/* Back arrow button */}
                     <IconButton
                         sx={{ position: 'absolute', top: '8px', left: '8px' }}

@@ -4,6 +4,7 @@ import { Container, FormControl } from 'react-bootstrap';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Close } from '@mui/icons-material';
 import { size, weight } from "../../store/theme";
+import styles from '../../styles/Home.module.css'
 
 
 const style = {
@@ -19,7 +20,7 @@ const style = {
   p: 4,
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
+  // alignItems: 'center',
   justifyContent: 'space-between',
 };
 
@@ -71,7 +72,7 @@ const ParentModal = ({ open, setOpen }) => {
         onClose={handleClose}
       // style={{ zIndex: "3000" }}
       >
-        <Box sx={style}>
+        <Box sx={style} className={styles.Mainbox}>
           {/* Back arrow button */}
           <IconButton
             sx={{ position: 'absolute', top: '8px', left: '8px' }}
@@ -80,8 +81,11 @@ const ParentModal = ({ open, setOpen }) => {
             <ArrowBackIosIcon />
           </IconButton>
 
-          <Typography  sx={{ fontSize: size.font1,
-                    fontWeight: weight.medium, }} >
+          <Typography sx={{
+            fontSize: size.font1,
+            fontWeight: weight.medium,
+            textAlign:'center'
+          }} >
             Your tasks live in list
           </Typography>
 
@@ -104,22 +108,23 @@ const ParentModal = ({ open, setOpen }) => {
             sx={{ mt: 4 }}
           /> */}
           <Box>
-            <InputLabel htmlFor="input-with-icon-adornment" style={{  textAlign: 'left' }}>
+            <InputLabel htmlFor="input-with-icon-adornment" style={{ textAlign: 'left' }}>
               List name
             </InputLabel>
             <Input
-              style={{ width: '650px' }}
+              // style={{ width: '650px' }}
+              style={{ width: '100%', textAlign: 'left' }}
               id="input-with-icon-adornment"
               placeholder="ENTER LIST NAME"
               type='text'
               value={name}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
-              // startAdornment={
-              //   <InputAdornment position="start" >
+            // startAdornment={
+            //   <InputAdornment position="start" >
 
-              //   </InputAdornment>
-              // }
+            //   </InputAdornment>
+            // }
             />
           </Box>
 
@@ -158,12 +163,6 @@ const ParentModal = ({ open, setOpen }) => {
           >
             Done
           </Button>
-
-
-
-
-
-
 
 
         </Box>

@@ -5,12 +5,18 @@ import MiniDrawer from "../components/Minidrawer";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import GridviewCard from "./Gridviewcard";
+import AddIcon from "@mui/icons-material/Add";
+import { size, weight } from "../../store/theme";
+import  useState from "react";
+
+
+
 // import Grid from '@mui/material/Grid';
 // import Card from '@mui/material/Card';
 // import CardActions from '@mui/material/CardActions';
 // import CardContent from '@mui/material/CardContent';
 // import Typography from '@mui/material/Typography';
-import GridviewCard from "./Gridviewcard";
 // import Divider from '@mui/material/Divider';
 // import Form from 'react-bootstrap/Form';
 // import Avatar from '@mui/material/Avatar';
@@ -21,8 +27,8 @@ import GridviewCard from "./Gridviewcard";
 // import Select from '@mui/material/Select';
 // import SearchIcon from '@mui/icons-material/Search';
 // import MiniDrawer from '../components/Minidrawer';
-import AddIcon from "@mui/icons-material/Add";
-import { size, weight } from "../../store/theme";
+
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -34,6 +40,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Gridview = () => {
   const [age, setAge] = React.useState("");
+  // const [openModal, setOpenModal] = useState(false);
+
+ 
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -78,7 +87,11 @@ const Gridview = () => {
                   boxShadow: "1px 0px 1px 2px #aa2769",
                 }}
               >
-                TO DO <AddIcon />
+                TO DO 
+                <AddIcon  />
+                {/* <GridviewCard onClick={() => setOpenModal(true)}/> */}
+                
+
               </Box>
 
               <Box
@@ -204,6 +217,7 @@ const Gridview = () => {
           </Box>
         </Box>
       </Box>
+      {/* <GridviewCard openModal={openModal} setOpenModal={setOpenModal(true)}/> */}
     </>
   );
 };

@@ -5,6 +5,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Close, Email, LockOutlined } from '@mui/icons-material';
 import LinkIcon from '@mui/icons-material/Link';
 import { size, weight } from "../../store/theme";
+import styles from '../../styles/Home.module.css'
 
 const style = {
   position: 'absolute',
@@ -19,7 +20,7 @@ const style = {
   p: 4,
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
+  // alignItems: 'center',
   justifyContent: 'space-between',
 };
 
@@ -71,7 +72,7 @@ const ParentModalTwo = ({ open, setOpen }) => {
         onClose={handleClose}
       // style={{ zIndex: "3000" }}
       >
-        <Box sx={style}>
+        <Box sx={style} className={styles.Mainbox}>
           {/* Back arrow button */}
           <IconButton
             sx={{ position: 'absolute', top: '8px', left: '8px' }}
@@ -81,7 +82,7 @@ const ParentModalTwo = ({ open, setOpen }) => {
           </IconButton>
 
           <Typography sx ={{fontSize: size.font1,
-                    fontWeight: weight.medium,}}
+                    fontWeight: weight.medium, textAlign:'center'}}
            >
            Who is this folder for ?
           </Typography>

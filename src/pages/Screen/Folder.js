@@ -1,9 +1,7 @@
 import * as React from "react";
-// import PropTypes from 'prop-types';
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-// import Container from '@mui/material/Container';
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
@@ -12,17 +10,22 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Grid, IconButton } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import SquareIcon from "@mui/icons-material/Square";
-import Avatar from "@mui/material/Avatar";
-import { red } from "@mui/material/colors";
-import Stack from "@mui/material/Stack";
+
 import ParentModal from "./ParentModal";
 import ParentModalTwo from "./ParentModalTwo";
 import ParentModalThree from "./ParentModalThree";
 import { Close } from "@mui/icons-material";
 import { useState } from "react";
-// import Typography from '@mui/material';
 import { size, weight } from "../../store/theme";
+import styles from '../../styles/Home.module.css';
+// import PropTypes from 'prop-types';
+// import Container from '@mui/material/Container';
+// import SquareIcon from "@mui/icons-material/Square";
+// import Avatar from "@mui/material/Avatar";
+// import { red } from "@mui/material/colors";
+// import Stack from "@mui/material/Stack";
+// import Typography from '@mui/material';
+
 
 const style = {
   position: "absolute",
@@ -54,9 +57,9 @@ export default function Folder({ open, setOpen }) {
   return (
     <>
       <div>
-        <Modal open={open} onClose={handleClose} style={{ zIndex: "4000" }}>
+        <Modal open={open} onClose={handleClose} style={{ zIndex: "4000" }} >
           <Box style={{ display: "flex", justifyContent: "center" }}>
-            <Card sx={style}>
+            <Card sx={style} className={styles.Mainbox}>
               <CardContent>
                 <IconButton
                   sx={{ position: "absolute", top: "8px", right: "8px" }}
@@ -79,7 +82,7 @@ export default function Folder({ open, setOpen }) {
 
 
                 <Box mt={4}>
-                  <FormControl variant="standard">
+                  <FormControl variant="standard" style={{width:'100%'}}>
                     <InputLabel
                       htmlFor="input-with-icon-adornment"
                       style={{
@@ -91,7 +94,8 @@ export default function Folder({ open, setOpen }) {
                       Folder Name
                     </InputLabel>
                     < Input
-                      sx={{ width: "650px" }}
+                      // sx={{ width: "650px" }}
+                      
                       id="input-with-icon-adornment"
                       placeholder="Enter Folder Name"
                       type="text"
@@ -147,15 +151,6 @@ export default function Folder({ open, setOpen }) {
                   }}
                 >
                   <Grid item xs={10}>
-                    {/* <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid black', borderBottomWidth: 1, borderTopWidth: 0, height: '60px', padding: '15px' }}>
-                                            <Typography style={{ color: "grey" }}>
-                                                Shared with
-                                            </Typography>
-                                            <Avatar sx={{ bgcolor: red[800] }} >
-                                                A
-                                            </Avatar>
-                                        </Box> */}
-
                     <Box
                       onClick={() => {
                         setOpen2(true);
@@ -188,20 +183,7 @@ export default function Folder({ open, setOpen }) {
                   }}
                 >
                   <Grid item xs={10}>
-                    {/* <Box  
-                                         style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid black', borderBottomWidth: 1, borderTopWidth: 0, height: '60px', padding: '15px' }}>
-                                            {/* <Typography style={{ color: "grey" }}>
-                                                Task statuses
-                                            </Typography>
-
-                                             <Stack flexDirection="row">
-                                                <SquareIcon style={{ color: 'black' }} />
-                                                <SquareIcon style={{ color: 'green' }} />
-                                                <SquareIcon style={{ color: 'blue' }} />
-                                                <SquareIcon style={{ color: 'pink' }} />
-                                                <SquareIcon style={{ color: 'red' }} />
-                                            </Stack> 
-                                        </Box> */}
+                    
                     <Box
                       onClick={() => {
                         setOpen3(true);
@@ -226,14 +208,15 @@ export default function Folder({ open, setOpen }) {
               </CardContent>
               <Button
                 variant="contained"
-                style={{ width: "680px", textAlign: "center" }}
+                fullWidth
+                style={{  textAlign: "center" }}
               >
                 Create Folder
               </Button>
             </Card>
           </Box>
         </Modal>
-        {/* </BootstrapDialog> */}
+       
       </div>
 
       <ParentModal

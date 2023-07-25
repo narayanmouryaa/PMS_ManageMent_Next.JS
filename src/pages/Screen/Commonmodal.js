@@ -22,7 +22,7 @@ import Switch from "@mui/material/Switch";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import SquareIcon from "@mui/icons-material/Square";
 import Stack from "@mui/material/Stack";
-import Autocomplete from "@mui/material/Autocomplete";
+// import Autocomplete from "@mui/material/Autocomplete";
 import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
 import Avatar from "./Avatar";
 import axios from "axios";
@@ -35,7 +35,9 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import { size, weight } from "../../store/theme";
+// import { Close } from "@mui/icons-material";
 // import Checkbox from '@mui/material/Checkbox';
+import styles from "../../styles/Home.module.css";
 
 const style = {
   position: "absolute",
@@ -46,28 +48,10 @@ const style = {
   bgcolor: "background.paper",
   borderRadius: "10px",
   boxShadow: 24,
-  p: 8,
+  p: 4,
 };
 
-// const top10Films = [
-//   { label: "The Shawshank Redemption", year: 1994 },
-//   { label: "The Godfather", year: 1972 },
-//   { label: "The Godfather: Part II", year: 1974 },
-//   { label: "The Dark Knight", year: 2008 },
-//   { label: "12 Angry Men", year: 1957 },
-//   { label: "Schindler's List", year: 1993 },
-//   { label: "Pulp Fiction", year: 1994 },
-//   {
-//     label: "The Lord of the Rings: The Return of the King",
-//     year: 2003,
-//   },
-//   { label: "The Good, the Bad and the Ugly", year: 1966 },
-//   { label: "Fight Club", year: 1999 },
-//   {
-//     label: "The Lord of the Rings: The Fellowship of the Ring",
-//     year: 2001,
-//   },
-// ];
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -122,8 +106,14 @@ BootstrapDialogTitle.propTypes = {
 
 const CommonModal = ({ open, handleClose }) => {
   const [viewData, setViewData] = useState(1);
-
   const [checked, setChecked] = React.useState(true);
+
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   // const handleChange = (event) => {
   //   setChecked(event.target.checked);
@@ -155,7 +145,7 @@ const CommonModal = ({ open, handleClose }) => {
   const [comapleteStatus, setComapleteStatus] = useState("");
   const [closedStatus, setClosedStatus] = useState("");
   const [UserNameSelect, setUserNameSelect] = React.useState([]);
-  console.log(UserNameSelect, "UserNameSelect...........");
+  // console.log(UserNameSelect, "UserNameSelect...........");
   // get Color Get
   const [color, setColor] = useState({
     SpaceColor: "",
@@ -240,7 +230,7 @@ const CommonModal = ({ open, handleClose }) => {
 
   // console.log(fileData,"datafile............")
   const [selectedImage, setSelectedImage] = useState(null);
-  console.log(selectedImage,'selectedFile......')
+  // console.log(selectedImage,'selectedFile......')
 
   // Function to handle file selection
   const handleImageChange = (event) => {
@@ -258,22 +248,29 @@ const CommonModal = ({ open, handleClose }) => {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          // style={{ zIndex: "3000" }}
+        // style={{ zIndex: "3000" }}
         >
-          <Box sx={style}>
+          <Box className={styles.Mainbox}>
             {viewData === 1 && (
-              <Box sx={style}>
+              <Box sx={style} className={styles.Mainbox}>
                 <BootstrapDialogTitle
                   sx={{
                     fontSize: size.font1,
-                    fontWeight: weight.medium,
+                    fontWeight: weight.bold,
                     marginLeft: "-22px",
-                    display:'flex',
-                    justifyContent:'center'
+                    display: 'flex',
+                    justifyContent: 'center'
                   }}
-                  id="customized-dialog-title"
+
                   onClose={handleClose}
                 >
+                  {/* <IconButton
+                  sx={{ position: "absolute", top: "8px", right: "8px" }}
+                  onClick={handleClose}
+                >
+                  <Close />
+                </IconButton> */}
+
                   Create New Space
                 </BootstrapDialogTitle>
                 <Typography
@@ -286,9 +283,10 @@ const CommonModal = ({ open, handleClose }) => {
 
                 <Box
                   style={{ display: "flex", justifyContent: "space-between" }}
+                  className={styles.Mainbox}
                 >
-                  <Box>
-                    <Box mt={4}>
+                  <Box className={styles.Mainbox}>
+                    <Box mt={4} className={styles.Mainbox} >
                       <FormControl variant="standard">
                         <InputLabel
                           htmlFor="input-with-icon-adornment"
@@ -305,9 +303,9 @@ const CommonModal = ({ open, handleClose }) => {
                           type="text"
                           value={spaceName}
                           onChange={handleInputChange}
-                          // style={{ width: "400px" }}
+                          style={{ width: "250%" }}
                           sx={{
-                            width: 500,
+                            // width: 500,
                             fontSize: size.font3,
                             fontWeight: weight.medium,
                           }}
@@ -318,8 +316,8 @@ const CommonModal = ({ open, handleClose }) => {
                       </FormControl>
                     </Box>
 
-                    <Box mt={3}>
-                      <FormControl variant="standard">
+                    <Box mt={3} className={styles.Mainbox}>
+                      <FormControl variant="standard" style={{width:'80%'}}>
                         <InputLabel
                           htmlFor="input-with-icon-adornment"
                           style={{
@@ -333,8 +331,8 @@ const CommonModal = ({ open, handleClose }) => {
                           id="input-with-icon-adornment"
                           placeholder="Enter Space Color Code"
                           type="color"
-                          // style={{ width: "400px" }}
-                          sx={{ width: 500 }}
+                          style={{ width: "200%" }}
+                          // sx={{ width: 500 }}
                           name="SpaceColorCode"
                           value={SpaceColorCode}
                           onChange={(e) => setSpaceColorCode(e.target.value)}
@@ -345,7 +343,7 @@ const CommonModal = ({ open, handleClose }) => {
                       </FormControl>
                     </Box>
                     <Box mt={3}>
-                      <FormControl variant="standard">
+                      <FormControl variant="standard" >
                         <InputLabel
                           htmlFor="input-with-icon-adornment"
                           style={{
@@ -360,8 +358,7 @@ const CommonModal = ({ open, handleClose }) => {
                           placeholder="Upload Space icon"
                           type="file"
                           onChange={handleImageChange}
-                          style={{ paddingBottom: "10px" }}
-                          sx={{ width: 500 }}
+                          style={{ paddingBottom: "10px",width:'160%' }}
                           startAdornment={
                             <InputAdornment position="start"></InputAdornment>
                           }
@@ -369,37 +366,8 @@ const CommonModal = ({ open, handleClose }) => {
                       </FormControl>
                     </Box>
                     <Box>
-                      {/* <FormControl variant="standard" sx={{ minWidth: 200 }}>
-                        <InputLabel
-                          htmlFor="input-with-icon-adornment"
-                          style={{ fontWeight: "600", fontSize: "18px" }}
-                        >
-                          Select User
-                        </InputLabel>
-                        <Input
-                          id="input-with-icon-adornment"
-                          placeholder="Select User Name"
-                          type="text"
-                          style={{ marginTop: "50px" }}
-                          sx={{ width: 500 }}
-                          startAdornment={
-                            <InputAdornment position="start">
-                              <Autocomplete
-                                disablePortal
-                                id="combo-box-demo"
-                                options={top10Films}
-                                sx={{ width: 250, height: 80 }}
-                                  renderInput={(params) => (
-                                 <TextField {...params} label="Movie" />
-                                  )}
-                              />
-                            </InputAdornment>
-                          }
-                          
-                           />
-                      </FormControl> */}
 
-                      <FormControl sx={{ m: 1 }}>
+                      <FormControl sx={{ m: 1 }} style={{width:'160%'}}>
                         <InputLabel
                           sx={{ mt: 2 }}
                           id="demo-multiple-checkbox-label"
@@ -415,7 +383,8 @@ const CommonModal = ({ open, handleClose }) => {
                           input={<OutlinedInput label="Tag" />}
                           renderValue={(selected) => selected.join(", ")}
                           MenuProps={MenuProps}
-                          sx={{ width: "500px", mt: 2 }}
+                          sx={{  mt: 2, height: '50px' }}
+                          
                         >
                           {names.map((name) => (
                             <MenuItem key={name} value={name}>
@@ -429,7 +398,7 @@ const CommonModal = ({ open, handleClose }) => {
                       </FormControl>
                     </Box>
                   </Box>
-                  <Box style={{ display: "flex" }}>
+                  <Box style={{ display: "flex" }} className={styles.Mainbox}>
                     <Avatar
                       name={inputValue}
                       SpaceColoCode={SpaceColorCode}
@@ -444,7 +413,8 @@ const CommonModal = ({ open, handleClose }) => {
                 ) : (
                   <Button
                     variant="contained"
-                    style={{ marginTop: "50px", width: "650px" }}
+                    fullWidth
+                    style={{ marginTop: "30px" }}
                     onClick={() => setViewData(viewData + 1)}
                   >
                     Next
@@ -453,10 +423,10 @@ const CommonModal = ({ open, handleClose }) => {
               </Box>
             )}
             {viewData === 2 && (
-              <Box sx={style}>
+              <Box sx={style} className={styles.Mainbox}>
                 <Box>
                   <Typography
-                    sx={{ fontSize: size.font1, fontWeight: weight.medium }}
+                    sx={{ fontSize: size.font1, fontWeight: weight.bold }}
                   >
                     <Button onClick={() => setViewData(viewData - 1)}>
                       {" "}
@@ -507,6 +477,7 @@ const CommonModal = ({ open, handleClose }) => {
                       </label>
                       <TextField
                         fullWidth
+                        style={{ height: '40px' }}
                         type="color"
                         name="ActiveStatusColor"
                         value={ActiveStatusColorCode}
@@ -630,7 +601,8 @@ const CommonModal = ({ open, handleClose }) => {
                   ) : (
                     <Button
                       variant="contained"
-                      style={{ width: "650px" }}
+                      fullWidth
+                      // style={{ width: "650px" }}
                       onClick={() => setViewData(viewData + 1)}
                     >
                       Next
@@ -640,7 +612,7 @@ const CommonModal = ({ open, handleClose }) => {
               </Box>
             )}
             {viewData === 3 && (
-              <Box sx={style}>
+              <Box sx={style} className={styles.Mainbox}>
                 <Box>
                   <Typography
                     sx={{ display: "flex", fontSize: 35, fontWeight: 600 }}
@@ -655,7 +627,7 @@ const CommonModal = ({ open, handleClose }) => {
                     <span
                       style={{
                         fontSize: size.font1,
-                        fontWeight: weight.medium,
+                        fontWeight: weight.bold,
                       }}
                     >
                       {" "}
@@ -737,7 +709,8 @@ const CommonModal = ({ open, handleClose }) => {
                   ) : (
                     <Button
                       variant="contained"
-                      style={{ width: "650px" }}
+                      fullWidth
+                      // style={{ width: "650px" }}
                       onClick={() => setViewData(viewData + 1)}
                     >
                       Next
@@ -747,7 +720,7 @@ const CommonModal = ({ open, handleClose }) => {
               </Box>
             )}
             {viewData === 4 && (
-              <Box sx={style}>
+              <Box sx={style} className={styles.Mainbox}>
                 <Box>
                   <Typography
                     sx={{ fontSize: 35, fontWeight: 600, marginLeft: "30px" }}
@@ -758,7 +731,7 @@ const CommonModal = ({ open, handleClose }) => {
                     <span
                       style={{
                         fontSize: size.font1,
-                        fontWeight: weight.medium,
+                        fontWeight: weight.bold,
                       }}
                     >
                       {" "}
@@ -966,10 +939,11 @@ const CommonModal = ({ open, handleClose }) => {
                   {viewData === 4 ? (
                     <Button
                       variant="contained"
+                      fullWidth
                       style={{
-                        width: "560px",
+                        // width: "560px",
                         marginTop: "30px",
-                        marginLeft: "54px",
+                        // marginLeft: "54px",
                       }}
                       onClick={handleSubmit}
                     >
@@ -978,7 +952,8 @@ const CommonModal = ({ open, handleClose }) => {
                   ) : (
                     <Button
                       variant="contained"
-                      style={{ width: "650px" }}
+                      fullWidth
+                      // style={{ width: "650px" }}
                       onClick={() => setViewData(viewData + 1)}
                     >
                       Next
