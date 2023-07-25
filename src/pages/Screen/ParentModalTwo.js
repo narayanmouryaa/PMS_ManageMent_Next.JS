@@ -4,7 +4,7 @@ import { Button, Modal, Typography, Box, Card, CardContent, IconButton, TextFiel
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Close, Email, LockOutlined } from '@mui/icons-material';
 import LinkIcon from '@mui/icons-material/Link';
-import { size, weight } from "../assets/theme";
+import { size, weight } from "../../styles/theme";
 import styles from '../../styles/Home.module.css'
 
 const style = {

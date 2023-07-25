@@ -13,7 +13,7 @@ import UserModal from "../Screen/Usermodal";
 import NavbarFixed from "../components/Navbar";
 import FixedSidenav from "../components/Fixedsidenav";
 import MiniDrawer from "../components/Minidrawer";
-import { size } from "../assets/theme";
+import { size } from "../../styles/theme";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',

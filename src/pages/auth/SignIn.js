@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "../../styles/Home.module.css";
 // import { size } from '../assets/theme/theme'
-import { weight } from "../assets/theme";
+import { weight } from "../../styles/theme";
 
 const SignIn = () => {
   const navigate = useRouter();

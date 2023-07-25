@@ -64,7 +64,7 @@ export default function BasicMenu() {
           </MenuItem>
         </Nav.Link>
 
-        <Divider />
+        {/* <Divider /> */}
         {/* <MenuItem onClick={handleClose}>Logout</MenuItem> */}
       </Menu>
 

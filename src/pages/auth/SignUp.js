@@ -38,7 +38,7 @@ export default function SignUp() {
     setData({ ...data, [name]: value });
   };
 
-  console.log(process.env.REACT_APP_BASE_URL, "apiEndPoint");
+  // console.log(process.env.REACT_APP_BASE_URL, "apiEndPoint");
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();

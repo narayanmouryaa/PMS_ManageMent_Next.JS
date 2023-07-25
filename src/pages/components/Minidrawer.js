@@ -22,7 +22,7 @@ import CommonModal from "../Screen/Commonmodal";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 // import zIndex from '@mui/material/styles/zIndex';
-import { size, weight } from "../assets/theme";
+import { size, weight } from "../../styles/theme";
 import { useEffect } from "react";
 import axios from "axios";
 
@@ -62,11 +62,11 @@ const NestedList = ({ primary, list }) => {
       setApiData(apiResponse.data.data);
       return apiResponse.data;
     } catch (error) {
-      console.error("Error:", error.message);
+      // console.error("Error:", error.message);
     }
   };
 
-  console.log(apiData,'........ApiData')
+  // console.log(apiData,'........ApiData')
   useEffect(() => {
     getData();
   }, []);

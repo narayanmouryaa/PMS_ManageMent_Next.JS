@@ -24,7 +24,7 @@ import SquareIcon from "@mui/icons-material/Square";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
-import Avatar from "./Avatar";
+import Avatar from "../../store/Avatar";
 import axios from "axios";
 import { toast } from "react-toastify";
 // import MultipleSelectCheckmarks from "@/store/multipleselectuser";
@@ -35,7 +35,7 @@ import MenuItem from "@mui/material/MenuItem";
 // import FormControl from '@mui/material/FormControl';
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
-import { size, weight } from "../assets/theme";
+import { size, weight } from "../../styles/theme";
 // import Checkbox from '@mui/material/Checkbox';
 import styles from '../../styles/Home.module.css'
 
@@ -48,7 +48,7 @@ const style = {
   bgcolor: "background.paper",
   borderRadius: "10px",
   boxShadow: 24,
-  p: 8,
+  p:4,
 };
 
 
@@ -132,8 +132,6 @@ const CommonModal = ({ open, handleClose }) => {
       closedStatusname: "",
     },
   });
-  console.log(formData, ".........................formData");
-
   const handleInputChanges = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -175,9 +173,9 @@ const CommonModal = ({ open, handleClose }) => {
     axios
       .post(apiEndpoint, formData, { headers })
       .then((response) => {
-        console.log("POST request successful:", response.data);
+        // console.log("POST request successful:", response.data);
         const { _id } = response.data;
-        console.log("Newly inserted document _id:", _id);
+        // console.log("Newly inserted document _id:", _id);
         toast.success(response.data.message);
 
         // Perform any other actions upon success, e.g., show a success message
@@ -185,14 +183,14 @@ const CommonModal = ({ open, handleClose }) => {
       .catch((error) => {
         if (error.response && error.response.status === 403) {
           // Handle 403 error here
-          console.log("403 Error: Access Denied");
+          // console.log("403 Error: Access Denied");
           toast.success(response.data.message);
           toast.success("403 Error: Access Denied");
 
           // Perform any specific actions for a 403 error, e.g., show an error message
         } else {
           // Handle other errors
-          console.log("Error:", error.message);
+          // console.log("Error:", error.message);
           toast.success(error.message);
           // Perform any other actions for other errors, e.g., show a generic error message
         }
