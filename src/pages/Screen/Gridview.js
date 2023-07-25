@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import GridviewCard from "./Gridviewcard";
 import AddIcon from "@mui/icons-material/Add";
-import { size, weight } from "../../store/theme";
+import { size, weight } from "../assets/theme";
 import  useState from "react";
 
 

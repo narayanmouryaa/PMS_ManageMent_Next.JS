@@ -16,7 +16,7 @@ import ParentModalTwo from "./ParentModalTwo";
 import ParentModalThree from "./ParentModalThree";
 import { Close } from "@mui/icons-material";
 import { useState } from "react";
-import { size, weight } from "../../store/theme";
+import { size, weight } from "../assets/theme";
 import styles from '../../styles/Home.module.css';
 // import PropTypes from 'prop-types';
 // import Container from '@mui/material/Container';

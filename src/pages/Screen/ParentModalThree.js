@@ -3,7 +3,7 @@ import { Button, Modal, Typography, Box, IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Close } from '@mui/icons-material';
 import Link from 'next/link';
-import { size, weight } from "../../store/theme";
+import { size, weight } from "../assets/theme";
 import styles from '../../styles/Home.module.css'
 
 const style = {

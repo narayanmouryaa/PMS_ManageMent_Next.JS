@@ -24,7 +24,7 @@ import SquareIcon from "@mui/icons-material/Square";
 import Stack from "@mui/material/Stack";
 // import Autocomplete from "@mui/material/Autocomplete";
 import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
-import Avatar from "./Avatar";
+import Avatar from "../Screen/Avatar";
 import axios from "axios";
 // import MultipleSelectCheckmarks from "@/store/multipleselectuser";
 
@@ -34,7 +34,7 @@ import MenuItem from "@mui/material/MenuItem";
 // import FormControl from '@mui/material/FormControl';
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
-import { size, weight } from "../../store/theme";
+import { size, weight } from "../../pages/assets/theme";
 // import { Close } from "@mui/icons-material";
 // import Checkbox from '@mui/material/Checkbox';
 import styles from "../../styles/Home.module.css";
