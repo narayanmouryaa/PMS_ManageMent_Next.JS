@@ -247,7 +247,9 @@ const CommonModal = ({ open, handleClose }) => {
                 >
                   <Box className={styles.Mainbox} >
                     <Box mt={4} className={styles.Mainbox}>
-                      <FormControl variant="standard">
+                      <FormControl variant="standard" 
+                      style={{width:'150%'}} >
+                        
                         <InputLabel
                           htmlFor="input-with-icon-adornment"
                           style={{
@@ -261,13 +263,13 @@ const CommonModal = ({ open, handleClose }) => {
                           id="input-with-icon-adornment"
                           placeholder="Enter Space Name"
                           type="text"
-                          // value={spaceName}
+                        //  style={{ width: "250%" }}
                           name="name"
                           value={formData.name}
                           onChange={handleInputChanges}
-                          style={{ width: "250%" }}
+                          
                           sx={{
-                            // width: 500,
+                           
                             fontSize: size.font3,
                             fontWeight: weight.medium,
                           }}
@@ -279,7 +281,7 @@ const CommonModal = ({ open, handleClose }) => {
                     </Box>
 
                     <Box mt={3} className={styles.Mainbox}>
-                      <FormControl variant="standard" style={{width:'80%'}}>
+                      <FormControl variant="standard" style={{width:'100%'}}>
                         <InputLabel
                           htmlFor="input-with-icon-adornment"
                           style={{
@@ -293,7 +295,7 @@ const CommonModal = ({ open, handleClose }) => {
                           id="input-with-icon-adornment"
                           placeholder="Enter Space Color Code"
                           type="color"
-                          style={{ width: "100%" }}
+                          style={{ width: "150%" }}
                           // sx={{ width: 500 }}
                           name="color"
                           value={formData.color}
@@ -305,7 +307,7 @@ const CommonModal = ({ open, handleClose }) => {
                       </FormControl>
                     </Box>
                     <Box mt={3}>
-                      <FormControl variant="standard">
+                      <FormControl variant="standard" style={{width:'150%'}}>
                         <InputLabel
                           htmlFor="input-with-icon-adornment"
                           style={{
@@ -321,7 +323,7 @@ const CommonModal = ({ open, handleClose }) => {
                           type="file"
                           accept="image/*"
                           onChange={handleImageChange}
-                          style={{ paddingBottom: "10px" ,width:'160%'}}
+                          style={{ paddingBottom: "10px" }}
                           // sx={{ width: 500 }}
                           startAdornment={
                             <InputAdornment position="start"></InputAdornment>
@@ -332,7 +334,7 @@ const CommonModal = ({ open, handleClose }) => {
                     <Box>
                       
 
-                      <FormControl variant="outlined" margin="normal" style={{width:'160%'}}>
+                      <FormControl variant="outlined" margin="normal" style={{width:'150%'}}>
                         <InputLabel>Shared With</InputLabel>
                         <Select
                           name="sharedWith"
@@ -341,7 +343,7 @@ const CommonModal = ({ open, handleClose }) => {
                           onChange={handleUserSelect}
                           label="Shared With"
                           style={{ paddingBottom: "10px" }}
-                          sx={{ width: 500 }}
+                          // sx={{ width: 500 }}
                         >
                           {users.map((user, index) => (
                             <MenuItem key={index} value={user}>

@@ -18,25 +18,25 @@ import Autocomplete from "@mui/material/Autocomplete"; // Import Autocomplete
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"; // Import DatePicker
 import { size, weight } from "../../styles/theme";
 
-const StyledBadge = styled(Badge)(({ theme }) => ({
-  "& .MuiBadge-badge": {
-    backgroundColor: "#44b700",
-    color: "#44b700",
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    "&::after": {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      borderRadius: "50%",
-      border: "1px solid currentColor",
-      content: '""',
-    },
-  },
-}));
+// const StyledBadge = styled(Badge)(({ theme }) => ({
+//   "& .MuiBadge-badge": {
+//     backgroundColor: "#44b700",
+//     color: "#44b700",
+//     boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+//     "&::after": {
+//       position: "absolute",
+//       top: 0,
+//       left: 0,
+//       width: "100%",
+//       height: "100%",
+//       borderRadius: "50%",
+//       border: "1px solid currentColor",
+//       content: '""',
+//     },
+//   },
+// }));
 
-const GridviewCard = () => {
+const GridviewCard = (handleModalOpen,handleModalClose) => {
   const [cards, setCards] = useState([]);
   const [cardTitle, setCardTitle] = useState("");
   const [flagColor, setFlagColor] = useState("#f50057");
@@ -46,6 +46,10 @@ const GridviewCard = () => {
   const [editCardIndex, setEditCardIndex] = useState(-1);
   const [openModal,setOpenModal] = useState(false);
  
+
+
+
+  
 
   // Sample list of users for Autocomplete
   const users = [
@@ -118,18 +122,22 @@ const GridviewCard = () => {
 
   return (
     <div>
-      <Button variant="contained" onClick={() => setOpenModal(true)}>
-        +
-      </Button>
 
-      <Modal open={openModal} onClose={() => setOpenModal(false)}>
+
+      
+      <Button variant="outlined" color="secondary" sx={{textTransform:'none',color:'black'}} onClick={() => setOpenModal(true)}>
+         + Add task
+      </Button>
+      
+
+      <Modal open={openModal}   onClose={()=>(setOpenModal(false))} >
         <Card sx={{ borderRadius: 2, mt: 2, maxWidth: 400, mx: "auto" }}>
           <CardContent>
             <Typography
               sx={{
                 fontWeight: weight.low,
                 fontSize: size.font2,
-                textAlign: "start",
+                textAlign: "center",
                 marginBottom: 2,
               }}
               gutterBottom
@@ -143,10 +151,10 @@ const GridviewCard = () => {
               onChange={(e) => setCardTitle(e.target.value)}
               fullWidth
               margin="normal"
-              style={{ marginBottom: 10 }}
+              style={{ marginBottom: 10}}
             />
             <Box
-              sx={{ display: "flex", alignItems: "center", marginBottom: 10 }}
+              sx={{ display: "flex", alignItems: "center", mb: 4 }}
             >
               <IconButton
                 onClick={() => setFlagColor("#f50057")}
@@ -195,7 +203,7 @@ const GridviewCard = () => {
               renderInput={(params) => (
                 <TextField {...params} fullWidth margin="normal" />
               )}
-              style={{ marginBottom: 10 }}
+              sx={{ mb: 1 }}
               disablePast
             />
             <DatePicker
@@ -203,9 +211,9 @@ const GridviewCard = () => {
               value={endDate}
               onChange={(newValue) => setEndDate(newValue)}
               renderInput={(params) => (
-                <TextField {...params} fullWidth margin="normal" />
+                <TextField  {...params} fullWidth margin="normal" />
               )}
-              style={{ marginBottom: 10 }}
+              sx={{ mb: 1}}
               disablePast
             />
             <Autocomplete
@@ -236,6 +244,7 @@ const GridviewCard = () => {
                 onClick={handleCardSave}
                 variant="contained"
                 color="primary"
+                sx={{textTransform:'none'}}
               >
                 Save Card
               </Button>
@@ -244,7 +253,7 @@ const GridviewCard = () => {
         </Card>
       </Modal>
 
-      <div className="cards-container">
+      <div  className="cards-container">
         {cards.map((card, index) => (
           <Card key={index} sx={{ borderRadius: 2, mt: 2 }}>
             <CardContent>
@@ -264,7 +273,7 @@ const GridviewCard = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  marginTop: 10,
+                  mt: 4,
                 }}
               >
                 <IconButton style={{ color: card.flagColor }}>

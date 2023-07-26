@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from 'react'; // Import useState from 'react'
+// import React from "react";
 import NavbarFixed from "../components/Navbar";
 import FixedSidenav from "../components/Fixedsidenav";
 import MiniDrawer from "../components/Minidrawer";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import GridviewCard from "./Gridviewcard";
+
 import AddIcon from "@mui/icons-material/Add";
 import { size, weight } from "../../styles/theme";
-import  useState from "react";
+import { Button } from 'react-bootstrap';
+import GridviewCard from './Gridviewcard';
+import { AddAPhoto } from '@mui/icons-material';
+// import  useState from "react";
+
+
 
 
 
@@ -40,9 +46,15 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Gridview = () => {
   const [age, setAge] = React.useState("");
-  // const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
- 
+  const handleModalOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleModalClose = () => {
+    setOpenModal(false);
+  };
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -87,10 +99,14 @@ const Gridview = () => {
                   boxShadow: "1px 0px 1px 2px #aa2769",
                 }}
               >
-                TO DO 
-                <AddIcon  />
-                {/* <GridviewCard onClick={() => setOpenModal(true)}/> */}
-                
+                TO DO
+                {/* <Button onClick={handleModalOpen}  > <AddIcon />    </Button> */}
+                {/* <Button variant="contained"  onClick={() => setOpenModal(true)}>
+               <AddIcon/>
+                              </Button> */}
+
+
+
 
               </Box>
 
@@ -133,10 +149,14 @@ const Gridview = () => {
                   boxShadow: "1px 0px 1px 2px #228c22",
                   display: "flex",
                   alignItems: "center",
+                  justifyContent: 'space-around',
                   pl: 4,
                 }}
               >
                 IN PROGRESS
+                {/* <Button onClick={handleModalOpen} > <AddIcon />     </Button> */}
+
+                {/* <GridviewCard open={openModal} handleClose={handleModalClose} /> */}
               </Box>
 
               <Box
@@ -174,6 +194,7 @@ const Gridview = () => {
                   borderRadius: 2,
                   display: "flex",
                   alignItems: "center",
+                  justifyContent: 'space-around',
                   pl: 4,
                   fontSize: size.font13,
                   fontWeight: weight.bold,
@@ -181,6 +202,9 @@ const Gridview = () => {
                 }}
               >
                 COMPLETE
+                {/* <Button onClick={handleModalOpen} > <AddIcon />     </Button> */}
+
+                {/* <GridviewCard open={openModal} handleClose={handleModalClose} /> */}
               </Box>
 
               <Box
@@ -200,7 +224,7 @@ const Gridview = () => {
                   <GridviewCard />
                 </Box>
 
-                
+
               </Box>
             </Box>
 
@@ -217,7 +241,7 @@ const Gridview = () => {
           </Box>
         </Box>
       </Box>
-      {/* <GridviewCard openModal={openModal} setOpenModal={setOpenModal(true)}/> */}
+
     </>
   );
 };
